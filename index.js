@@ -74,20 +74,29 @@ class Person {
 */
 
 class Car {
-  constructor(model, milesPerGallon){
+  constructor(model, milesPerGallon, fuel){
     this.model = model;
     this.milesPerGallon = milesPerGallon;
     this.tank = 0;
     this.odometer = 0; 
   }
   fill(gallons){
-    this.tank = this.tank = gallons; 
+    this.tank = this.tank + gallons; 
   }
   drive(distance){
     this.odometer = this.odometer + distance;
-    this.tank = this.tank 
-  }
-}
+    this.tank = this.tank - (distance/this.milesPerGallon);
+    let maxDistance = this.tank * this.milesPerGallon; 
+
+    if(distance/this.milesPerGallon > this.tank){
+        this.odometer = this.odometer + maxDistance; 
+        this.tank = 0; 
+        return `I ran out of fuel at ${this.odometer} miles!`
+    }
+      
+  } //this ends the drive method
+
+} // this ends the class Car
 
 /*
   TASK 3
@@ -102,21 +111,17 @@ class Car {
         + {name} and {location} of course come from the instance's own properties.
 */
 class Lambdasian {
-    constructor(person){
-        this.name = person.name;
-        this.age = person.age;
-        this.location = person.location;
+    constructor(attributes){
+        this.name = attributes.name;
+        this.age = attributes.age;
+        this.location = attributes.location;
     }
     speak(){
       return `Hello my name is ${this.name}, I am from ${this.location}`
     }
 }
 
-const person = new Lambdasian({
-  name: 'Joe',
-  age: 20,
-  location: 'Usa'
-})
+
 
 /*
   TASK 4
@@ -132,9 +137,31 @@ const person = new Lambdasian({
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
-
+class Instructor extends Lambdasian{
+  constructor(skills){
+    super(skills)
+    this.speciality = skills.speciality,
+    this.favLanguage = skills.favLanguage,
+    this.catchPhrase = skills.catchPhrase
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}.`
+  }
+  grade(student, subject){
+    return `${student.this.name}`
+  }
 }
+
+const teacher = new Instructor({
+  name: 'Katy',
+  age: 30,
+  location: 'Canada',
+  speciality: 'redux',
+  favLanguage: 'Javascript',
+  catchPhrase: 'spacing is everything'
+});
+
+console.log(teacher.name);
 
 /*
   TASK 5
