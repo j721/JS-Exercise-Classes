@@ -138,17 +138,18 @@ class Lambdasian {
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
 class Instructor extends Lambdasian{
-  constructor(skills){
-    super(skills)
-    this.speciality = skills.speciality,
-    this.favLanguage = skills.favLanguage,
-    this.catchPhrase = skills.catchPhrase
+  constructor(attributes){
+    super(attributes)
+    this.specialty = attributes.specialty,
+    this.favLanguage = attributes.favLanguage,
+    this.catchPhrase = attributes.catchPhrase
   }
+
   demo(subject){
     return `Today we are learning about ${subject}.`
   }
-  grade(student, subject){
-    return `${student.this.name}`
+  grade(student,subject){
+    return `${student.name} receives a perfect score on ${subject}`
   }
 }
 
@@ -178,8 +179,22 @@ console.log(teacher.name);
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-
+class Student extends Lambdasian {
+  constructor(attributes){
+  super(attributes)
+    this.previousBackground = attributes.previousBackground;
+    this.className = attributes.className;
+    this.favSubjects = attributes.favSubjects;
+  }
+  listSubjects(){
+    return `Loving HTML, CSS, JS!`
+  }
+  PRAssignment(subject){
+    return `${student.name} has submitted a PR for ${subject}`
+  }
+  sprintChallenge(){
+    return `${student.name} has begun sprint challenge on ${subject}`
+  }
 }
 
 /*
@@ -195,8 +210,18 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-
+class ProjectManager extends Student {
+  constructor(attributes){
+    super(attributes)
+    this.gradClassName= attributes.gradClassName;
+    this.favInstructor= attributes.favInstructor;
+  }
+  standUp(channel){
+    return `${this.name} announces to ${channel}, @channel standy times!`
+  }
+  debugsCode(student, subject){
+    return `${this.name} debugs ${student.name}'s code on ${subject}`
+  }
 }
 
 /*
